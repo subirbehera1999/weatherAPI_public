@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>weather</title>
+	
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+  {% if username %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+  {% else %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+  {% endif %}
+  
+	<style>
+		body{
+			min-height: 100vh;
+			background: url("{% static 'images/snow3.jpg' %}") no-repeat fixed;
+			background-size: cover;
+		}
+    .theading{
+      color: white;
+      font-weight: 100;
+      font: oblique;
+      font-size: 16px;   
+    }
+    .tdata{
+      color: white;
+      font-size: 13px;   
+    }
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarRightAlignExample"
+      aria-controls="navbarRightAlignExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars text-light m-3"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+      <!-- Left links -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:home' %}" >Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:register' %}">Register</a>
+        </li>
+        {% if user.is_authenticated and not user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:history' %}">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:login' %}">Login</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:contact' %}" >Contact</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+{% if username %}
+<div class="container box">
+	<div class="row justify-content-center">
+    <div class="col-md-4">
+      <form method="POST">
+        {% csrf_token %}
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form1Example1" name="city" autocomplete="off" required class="form-control text-input" />
+    <label class="form-label" for="form1Example1"><p>Enter city</p></label>
+  </div>
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-dark btn-rounded">Search</button>
+</form>
+    </div>
+	</div>
+  <br><br>
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="theading">CITY</th>
+            <th scope="col" class="theading">TIME</th>
+            <th scope="col" class="theading">TEMPRETURE</th>
+            <th scope="col" class="theading">HUMIDITY</th>
+            <th scope="col" class="theading">WIND</th>
+            <th scope="col" class="theading">DAY</th>
+            <th scope="col" class="theading">DESCRIPTION</th>
+            <th scope="col" class="theading">    </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if MSG %}
+
+          {% else %}
+          <tr>
+            <td class="tdata"><b>{{city}}</b></td>
+            <td class="tdata"><b>{{time}}</b></td>
+            <td class="tdata"><b>{{tempreture}}&#176; C</b></td>
+            <td class="tdata"><b>{{humidity}}</b></td>
+            <td class="tdata"><b>{{wind_speed}} Kmph</b></td>
+            <td class="tdata"><b>{{day}}</b></td>
+            <td class="tdata"><b>{{description}}</b></td>
+            <td class="tdata"><p><img src="https://api.openweathermap.org/img/w/{{icon}}.png" width="60px"></p></td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <h4 style="color: white;">{{MSG}}</h4>
+    </div>
+  </div>
+  
+</div>
+
+{% else %}
+<div class="container box">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Welcome To Weather Forcasting Web-application</h1>
+		</div>
+		<div class="col-md-12">
+			<p>To Know Current Weather Information, Open Your Account And Search City Name. <br>Allow users to know the weather report in detail. Let them know what will be the weather in the morning, <br> how cold or hot it will be during the night. Users want to know everything about and around them</p>
+		</div>
+	</div>
+</div>
+{% endif %}
+	
+	
+
+
+  <script src="{% static 'js/all.min.js' %}"></script>
+	<script src="{% static 'js/mdb.min.js' %}"></script>
+</body>
+</html>

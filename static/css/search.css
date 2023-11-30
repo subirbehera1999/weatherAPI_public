@@ -1,0 +1,19 @@
+.naving{
+	background: transparent;
+	color: transparent;
+}
+.item{
+	color: white;
+}
+.box{
+	margin-top: 80px;
+	margin-left: 100px;
+
+}
+.form-label p{
+	color: whitesmoke;
+}
+
+.form-outline .text-input {
+	color: white;
+}

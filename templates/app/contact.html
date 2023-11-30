@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>weather</title>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+	<style>
+		body{
+			min-height: 100vh;
+			background: url("{% static 'images/snow4.jpg' %}") no-repeat fixed;
+			background-size: cover;
+		}   
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarRightAlignExample"
+        aria-controls="navbarRightAlignExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars text-light m-3"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+        <!-- Left links -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:home' %}" >Home</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:register' %}">Register</a>
+          </li>
+          {% if user.is_authenticated and not user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:history' %}">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:login' %}">Login</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:contact' %}" >Contact</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+
+<div class="container box">
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <h2 class="contactheading text-center">CONTACT</h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+          <p class="text-center">Consumers want more than one way to get in touch with companies. While some customers want to talk on the phone, others may prefer to send an email if they’re busy and don’t have the time to sit on a call. A good Contact Us page features an array of options.Providing different types of contact options is especially important if you want to deliver convenient, 24/7 support. Self-service tools—such as AI-powered chat, FAQs, and knowledge base articles—help customers find the answers they need outside your business hours.</p>
+      </div>
+  </div>
+
+	<div class="row justify-content-around align-items-center">
+    <div class="col-md-4">
+        <i class="fa-solid fa-location-dot" style="color: white;"></i><h6 style="display: inline;"> Address</h6>
+        <p>Aswath Nagar, Marathahalli,<br>Bangalore, Karnataka, <br>560037</p><br>
+        <i class="fa-solid fa-phone" style="color: white;"></i><h6 style="display: inline;"> Phone</h6>
+        <p>+91-1234567890</p><br>
+        <i class="fa-solid fa-envelope" style="color: white;"></i><h6 style="display: inline;"> Email</h6>
+        <p>Subirbehera1999@gmail.com</p><br>
+        <i class="fa-brands fa-github" style="color: white;"></i><h6 style="display: inline;"> GitHub Profile</h6>
+        <p><a href="https://github.com/subirbehera1999">github.com/subirbehera1999</a></p>
+
+
+    </div>
+    <div class="col-md-4">
+        <form method="POST" onsubmit="return validateform()">
+          {% csrf_token %}
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="name" name="name" class="form-control text-input" />
+              <label class="form-label" for="name"><p>Name</p></label>
+            </div>
+          
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="email" name="email" class="form-control text-input" />
+              <label class="form-label" for="email"><p>Email address</p></label>
+            </div>
+          
+            <!-- Message input -->
+            <div class="form-outline mb-4">
+              <textarea class="form-control text-input" id="msg" name="msg" rows="4"></textarea>
+              <label class="form-label" for="msg"><p>Message</p></label>
+            </div>
+            
+            <div class="form-outline mb-4">
+              <label class="form-label" for="msg"><p>{{MSG}}</p></label>
+            </div>
+          
+            <!-- Checkbox -->
+           
+          
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+          </form>
+    </div>
+	</div>
+
+</div>
+
+
+
+  <script src="{% static 'js/all.min.js' %}"></script>
+	<script src="{% static 'js/mdb.min.js' %}"></script>
+	<script src="{% static 'js/contact.js' %}"></script>
+</body>
+</html>

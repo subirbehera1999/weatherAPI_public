@@ -1,0 +1,38 @@
+.naving{
+	background: transparent;
+	color: transparent;
+}
+.item{
+	color: white;
+}
+.box{
+	margin-top: 70px;
+	margin-left: 100px;
+}
+.box h1{
+	color: white;
+}
+.box p{
+	color: white;
+	font-size: 18px;
+}
+table .theading{
+	
+	text-decoration-color: aqua;
+}
+.form-outline .text-input {
+	color: white;
+}
+.form-label p{
+	color: whitesmoke;
+}
+.theading{
+    color: white;
+    font-weight: 100;
+    font: oblique;
+    font-size: 16px;   
+}
+.tdata{
+    color: white;
+    font-size: 13px;   
+}

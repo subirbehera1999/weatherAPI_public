@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registration page</title>
+	
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+	<style>
+		body{
+			min-height: 100vh;
+			background: url("{% static 'images/snow3.jpg' %}") no-repeat fixed;
+			background-size: cover;
+		}
+  
+   
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg naving">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarRightAlignExample"
+      aria-controls="navbarRightAlignExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars text-light m-3"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+      <!-- Left links -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:home' %}" >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:register' %}">Register</a>
+        </li>
+        {% if user.is_authenticated and not user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:history' %}">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:login' %}">Login</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link item" href="{% url 'app:contact' %}" >Contact</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<div class="container box">
+	<div class="row justify-content-center">
+    <div class="col-md-4">
+      <form method="POST" id="myform" autocomplete="off" onsubmit="return validateform()">
+        {% csrf_token %}
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline">
+        <input type="text" id="firstname" name="firstname" required autocomplete="off" class="form-control text-input" />
+        <label class="form-label" for="firstname"><p>First name</p></label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <input type="text" id="lastname" name="lastname" required autocomplete="off" class="form-control text-input" />
+        <label class="form-label" for="lastname"><p>Last name</p></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="email" name="email" required autocomplete="off" class="form-control text-input" />
+    <label class="form-label" for="email"><p>Email address</p></label>
+  </div>
+
+
+
+<!-- user input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="username" name="username" required autocomplete="off" class="form-control text-input" />
+    <label class="form-label" for="username"><p>Username</p></label>
+  </div>
+
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <input type="password" id="password" name="password" required autocomplete="off" class="form-control text-input" />
+    <label class="form-label" for="password"><p>Password</p></label>
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button><br><br>
+</form>
+      </div>
+      
+      
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <h5 style="color: white; font: 20px; margin-left: 55px;">{{MSG}}</h5>
+        </div>
+      </div>
+		
+	</div>
+</div>
+
+
+
+
+  <script src="{% static 'js/all.min.js' %}"></script>
+  <script src="{% static 'js/register.js' %}"></script>
+  <script src="{% static 'js/mdb.min.js' %}"></script>
+</body>
+</html>

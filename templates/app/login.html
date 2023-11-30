@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>login page</title>
+	
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+	<style>
+		body{
+			min-height: 100vh;
+			background: url("{% static 'images/snow3.jpg' %}") no-repeat fixed;
+			background-size: cover;
+		}
+    .invaliduser{
+      color: white;
+      font-size: 14px;
+      font-weight: 550;
+      font-family: monospace;
+    }
+
+
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarRightAlignExample"
+        aria-controls="navbarRightAlignExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars text-light m-3"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+        <!-- Left links -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:home' %}" >Home</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:register' %}">Register</a>
+          </li>
+          {% if user.is_authenticated and not user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:history' %}">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:login' %}">Login</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link item" href="{% url 'app:contact' %}" >Contact</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+<div class="container box">
+	<div class="row justify-content-center">
+
+    <div class="col-md-4 ">
+      <form method="POST">
+        {% csrf_token %}
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="username" name="username" autocomplete="off"  required="True" class="form-control text-input" />
+    <label class="form-label" for="username"><p>Username</p></label>
+  </div>
+
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <input type="password" id="password" name="password" autocomplete="off"  required="True" class="form-control text-input" />
+    <label class="form-label" for="password"><p>Password</p></label>
+  </div>
+
+  <!-- 2 column grid layout for inline styling -->
+  <div class="form-outline mb-4 ">
+
+    <div class="col justify-content-center">
+      <!-- Simple link -->
+      <a href="{% url 'app:forgetpassword' %}"><p>I forgot my password ?</p></a>
+    </div>
+  </div>
+
+
+  
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+</form>
+    </div>
+		
+	</div>
+  {% if MSG %}
+    <div class="row justify-content-center">
+      <div class="col-md-2">
+        <br><br>
+        <p class="invaliduser">{{MSG}}</p>
+      </div>
+    </div>
+{% endif %}
+</div>
+	
+	
+
+
+  <script src="{% static 'js/all.min.js' %}"></script>
+	<script src="{% static 'js/mdb.min.js' %}"></script>
+  <script>
+    window.addEventListener('load', function () {
+      var usernameInput = document.getElementById('username');
+      var passwordInput = document.getElementById('password');
+
+      usernameInput.value = '';
+      passwordInput.value = '';
+  });
+  
+
+  </script>
+</body>
+</html>

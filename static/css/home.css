@@ -1,0 +1,21 @@
+.item{
+	color: white;
+}
+.box{
+	margin-top: 150px;
+	margin-left: 100px;
+}
+.box h1{
+	color: white;
+}
+.box p{
+	color: white;
+	font-size: 18px;
+}
+table .theading{
+	
+	text-decoration-color: aqua;
+}
+.form-outline .text-input {
+	color: white;
+}
